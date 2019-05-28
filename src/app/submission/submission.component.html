@@ -1,0 +1,9 @@
+<div class="container  px-0 px-md-3"  >
+    <div class="jumbotron text-center my-3 mx-md-3 py-3 px-0 px-md-3 h-100" style="min-height: 90vh">
+      <div class="h6 mb-5 text-primary">Dotazník byl úspešne odeslán</div>
+      <div class="mb-5">
+        <button (click)="changeDtVisibility()" type="button" mdbBtn class="text-capitalize my-auto mx-auto" type="button" color="default" mdbWavesEffect>{{buttonText}}</button>
+      </div> 
+      <app-datatable (editFormEvent)="editForm($event)" *ngIf="datatableVisible" ></app-datatable>
+    </div>
+</div>

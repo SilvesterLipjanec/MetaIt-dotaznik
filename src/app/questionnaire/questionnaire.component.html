@@ -1,0 +1,95 @@
+<div class="container" >
+  <div class="jumbotron d-flex m-3 h-100 justify-content-center">
+    <!-- Default form row -->
+    <form class="w-100" style="max-width:700px" [formGroup]="questionForm" (ngSubmit)="onSubmit()" >
+      <h4 class="h4 mb-5 text-primary text-center">Dotazník</h4>
+      <!-- Grd row -->
+      <div class="form-row">
+        <!-- Grid column -->
+        <div class="form-group col-md-6 px-3">
+          <label required for="inputFirstname">Jméno</label>  
+          <input mdbInput formControlName="firstName" type="text" class="form-control" id="inputFirstname">  
+          </div>
+        <!-- Grid column -->
+        <!-- Grid column -->
+        <div class="form-group col-md-6 px-3">
+          <label required for="inputLastname">Příjmení</label>  
+          <input mdbInput formControlName="lastName" type="text" class="form-control" id="inputLastname">  
+        </div>
+        <!-- Grid column -->
+      </div>
+      <!-- Grd row -->
+      <div class="form-row">
+        <div class="form-group col-md-6 px-3">
+          <label required for="inputSelectAge">Věková kategorie</label>  
+          <select formControlName="ageCategory" (change)="search(searchBox.value)" class="form-control" id="inputSelectAge">
+            <option *ngFor="let o of options">
+              {{o.name}}
+            </option>
+          </select>
+        </div>
+        <div class="form-group col-md-6 px-3">
+          <label required for="inputSelectSex">Pohlaví</label>
+          <div id="inputSelectSex" class="mt-2">
+            <!-- Default unchecked -->
+            <div class="custom-control custom-radio custom-control-inline mr-5 ">
+              <input formControlName="sex" type="radio" class="custom-control-input" value="man" id="inputSelectMan" mdbInput>
+              <label class="custom-control-label" for="inputSelectMan">Muž</label>
+            </div>
+            
+            <!-- Default checked -->
+            <div class="custom-control custom-radio custom-control-inline">
+              <input formControlName="sex" type="radio" class="custom-control-input" value="woman" id="inputSelectWoman" checked mdbInput>
+              <label class="custom-control-label" for="inputSelectWoman">Žena</label>
+            </div>
+          </div>
+        </div> 
+      </div>
+      <div class="form-row">
+        <div class="col px-3">
+          <label>Oblíbená činnost</label>
+          <div class="input-group">
+            <input #searchBox formControlName="hobby" name="input-hobby" (input)="search(searchBox.value)" type="text" class="form-control input-dropdown-custom" aria-label="Text input with dropdown button">
+              <div class="input-group-append">
+                <div class="btn-group" mdbDropdown>
+                  <button mdbDropdownToggle type="button" mdbBtn size="md" class="dropdown-toggle z-depth-0 btn-dropdown-custom"
+                    mdbWavesEffect></button>
+                  <div class="dropdown-menu" style="right: 0; left:auto">
+                    <div (click)="fillInput(hobby.name)" *ngFor='let hobby of hobbies$ | async' class="dropdown-item" href="#">
+                      {{hobby.name}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+      <div class="form-row justify-content-center">
+        <div clas="col">
+          <button type="button" (click)="basicModal.show()" mdbBtn [disabled]="!questionForm.valid" class="mt-5 text-capitalize" color="primary" mdbWavesEffect>
+            <i class="far fa-paper-plane"></i> Odeslat formulář</button>
+        </div>
+      </div>
+      <!-- Default form row --> 
+      <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+                <span aria-hidden="true">×</span>
+              </button>
+              <h4 class="modal-title w-100" id="myModalLabel">Potvrzení odeslání</h4>
+            </div>
+            <div class="modal-body">
+              Opravdu si přejete odeslat formulář?
+            </div>
+            <div class="modal-footer">
+              <button type="button" mdbBtn color="secondary" class="waves-light text-capitalize" aria-label="Close" (click)="basicModal.hide()" mdbWavesEffect>Ne</button>
+              <button type="submit" mdbBtn  color="primary" class="relative waves-light text-capitalize" (click)="basicModal.hide()" mdbWavesEffect>Ano</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>    
+  </div>
+</div>

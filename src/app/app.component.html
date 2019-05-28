@@ -1,0 +1,6 @@
+<div [ngSwitch]="showComponent">
+    <app-start (viewChanged)="changeView($event)" *ngSwitchCase="'start'"></app-start>
+    <app-questionnaire [formId]="formId" (viewChanged)="changeView($event)" *ngSwitchCase="'questionnaire'"></app-questionnaire>
+    <app-submission  (editFormEvent)="editForm($event)" *ngSwitchCase="'submission'"></app-submission>
+</div>
+ 
